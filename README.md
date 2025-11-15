@@ -1,77 +1,41 @@
 📘 EdTech Task Manager — Full Stack Application
+The EdTech Task Manager is a full-stack, role-based task management system designed for a teacher–student environment.
+Students can create and track their own tasks, while teachers can view the tasks of students assigned to them.
+The application includes authentication, task CRUD operations, secure access control, and date-based task filtering.
+This project is built as a structured full-stack application with a Node.js backend and a React (Vite) frontend.
 
-A role-based EdTech Task Manager where Teachers and Students interact.
-Students can create and manage tasks. Teachers can view student tasks but cannot edit or delete them.
+🚀 Features
+🔐 Authentication & Authorization
+- Signup & login for Teacher and Student
+- Password hashing with bcryptjs
+- JWT-based authentication
+- Role-based access control
+- Teachers cannot modify student tasks
+  
+🧑‍🎓 Student Capabilities
+- Create new tasks
+- Edit task fields:
+    1. Title
+    2. Description
+    3. Due date
+    4. Progress (not-started, in-progress, completed)
+- Delete tasks
+- View all personal tasks
+- View all personal tasks:
+    1. not-started
+    2. in-progress
+    3. completed
+     
+👨‍🏫 Teacher Capabilities
+- View all assigned students
+- View tasks created by their students
+- Cannot edit or delete any student task
 
-This project is developed as part of the Digit IT Solutions Internship Take-Home Assignment.
-
-🚀 Features Overview
-🔐 Authentication
-
-Signup / Login for both Teacher and Student
-
-Password hashing using bcrypt
-
-Secure authentication using JWT
-
-Role-based access control (Teacher / Student)
-
-🧑‍🎓 Student Features
-
-Create tasks
-
-Update task fields:
-
-title
-
-description
-
-due date
-
-progress (not-started, in-progress, completed)
-
-Delete tasks
-
-View all own tasks
-
-Filter tasks based on:
-
-Overdue
-
-Today
-
-Upcoming
-
-Between specific date ranges
-
-👨‍🏫 Teacher Features
-
-View all students assigned to them
-
-View all student tasks
-
-Cannot edit or delete student tasks (strict ownership rule)
-
-📅 Task Fields
-
-title
-
-description
-
-dueDate
-
-progress
-
-createdAt
-
-userId
-
-🏛 Project Structure
-EdTech-Task-Manager/
-│
-├── server/                  # Backend (Node.js, Express, MongoDB)
+🗂 Project Structure
+EdTech_Task_Manager/
+├── server/                       # Backend (Node.js, Express, MongoDB)
 │   ├── index.js
-│   ├── .env
+│   ├── package.json
 │   ├── config/
 │   │   └── db.js
 │   ├── models/
@@ -83,192 +47,86 @@ EdTech-Task-Manager/
 │   ├── middleware/
 │   │   ├── auth.js
 │   │   └── errorHandler.js
-│   └── package.json
+│   └── .env                      # Not pushed to GitHub
 │
-├── client/                  # Frontend (React + Vite)
+├── client/                       # Frontend (React + Vite)
 │   ├── src/
 │   │   ├── pages/
-│   │   │   ├── Login.jsx
-│   │   │   └── Signup.jsx
-│   │   └── components/...
-│   ├── .env
-│   └── package.json
+│   │   ├── components/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.js
 │
-└── README.md                # ← This file
+└── README.md
 
-⚙️ Tech Stack
-Backend
-
-Node.js
-
-Express.js
-
-MongoDB + Mongoose
-
-bcryptjs
-
-jsonwebtoken
-
+🧩 Tech Stack
 Frontend
+- React (Vite)
+- Axios
+- React Router DOM
+Backend
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- bcryptjs
+- JSON Web Tokens
 
-React (Vite)
+🔧 Setup Instructions
+1. Clone Repository
+   git clone https://github.com/7706manoj/edtech-task-manager
+   cd edtech-task-manager
+2. Backend Setup
+   cd server
+   npm install
+   
+   Create server/.env:
+   PORT=5000
+   MONGO_URI=mongodb://127.0.0.1:27017/edtech_tasks
+   JWT_SECRET=yourStrongSecret
+   
+   Start backend:
+   npm run dev
+   =>MongoDB Connected
+     Server running on port 5000
+3. Frontend Setup
+   cd ../client
+   npm install
 
-Axios
+   Create client/.env:
+   VITE_API_URL=http://localhost:5000
 
-React Router DOM
-
-🔧 Setup & Installation
-1️⃣ Clone the repository
-git clone <repo-url>
-cd EdTech-Task-Manager
-
-2️⃣ Server Setup
-cd server
-npm install
-
-
-Create .env inside server:
-
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/digitit_tasks
-JWT_SECRET=yourStrongSecret
-
-
-Start backend:
-
-npm run dev
-
-
-Expected output:
-
-MongoDB Connected
-Server running on port 5000
-
-3️⃣ Client Setup
-cd client
-npm install
-
-
-Create .env inside client:
-
-VITE_API_URL=http://localhost:5000
-
-
-Start frontend:
-
-npm run dev
-
-
-Open browser at:
-
-http://localhost:5173
-
-🔑 Demo Accounts
-👨‍🏫 Teacher
-email: testteacher@example.com
-password: pass123
-
-🧑‍🎓 Student
-email: student1@example.com
-password: pass123
-teacherId: <paste teacher's userId here>
-
-
-Get teacher's userId:
-
-mongosh --eval "db.getSiblingDB('digitit_tasks').users.find().pretty()"
+   Start frontend:
+   npm run dev
+   Open application:
+   http://localhost:5173
 
 📡 API Endpoints Summary
-Auth APIs
-POST /auth/signup
+🔐 Authentication
+Method	     Endpoint	             Description
+POST	      /auth/signup	         Register teacher or student
+POST	      /auth/login	           Login → returns token, role, userId
 
-Signup (Teacher or Student)
+📝 Tasks (JWT Required)
+Method	            Endpoint	        Description
+GET               	/tasks	          Get tasks (supports filters)
+POST	              /tasks	          Create a task
+GET	                /tasks/:id	      Get single task
+PUT	                /tasks/:id	      Update task (student only)
+DELETE	            /tasks/:id	      Delete task (student only)
 
-POST /auth/login
+🔍 Supported Filters
+/tasks?due=overdue
+/tasks?due=today
+/tasks?due=upcoming
+/tasks?dueFrom=YYYY-MM-DD&dueTo=YYYY-MM-DD
 
-Login → returns { token, role, userId }
-
-Task APIs (JWT Required)
-POST /tasks
-
-Create a task
-
-GET /tasks
-
-Get tasks
-Supported filters:
-
-due=overdue
-
-dueFrom=YYYY-MM-DD
-
-dueTo=YYYY-MM-DD
-
-GET /tasks/:id
-
-Get single task
-
-PUT /tasks/:id
-
-Update task
-(Only student owner allowed)
-
-DELETE /tasks/:id
-
-Delete task
-(Only student owner allowed)
-
-🎥 Demo Video Checklist (Required for Submission)
-
-In the 4–7 minute demo video, show:
-
-✔ 1. Start backend → show “MongoDB Connected”
-✔ 2. Signup Teacher
-✔ 3. Copy Teacher userId from DB
-✔ 4. Signup Student (paste teacherId)
-✔ 5. Login Student → show dashboard
-✔ 6. Create tasks (normal + overdue)
-✔ 7. Update task progress
-✔ 8. Apply filters (Overdue / Today / Upcoming)
-✔ 9. Login Teacher → view student tasks
-✔ 10. Teacher attempts edit → gets “Not allowed”
-✔ 11. Show code (auth.js, tasks.js, models)
-✔ 12. End with GitHub repo link
-📌 Important Notes
-❗ Do NOT push .env to GitHub
-❗ Remove helper debug scripts before submission
-
-verifyPassword.js
-
-deleteUser.js
-
-checkUsers.js
-
-❗ Only necessary logs should remain
-
-MongoDB Connected
-
-Server running on port 5000
-
-🎯 Project Status
-
-Backend API — ✔ complete
-
-Frontend UI — ✔ working
-
-Auth + Role System — ✔ working
-
-Task CRUD — ✔ working
-
-Date filters — ✔ working
-
-Teacher constraints — ✔ working
-
-Debug scripts removed — ✔
-
-Ready for submission — ✔🎉
-
-🙌 Developed By
-
+✨ Author
 Porendla Manoj
 B.Tech 2026 Batch
+
+
+
+
+
