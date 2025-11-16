@@ -33,7 +33,7 @@ export default function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSaved = (task) => {
+  const handleSaved = () => {
     setEditing(null);
     setShowCreate(false);
     loadTasks(); // refresh after create/update
