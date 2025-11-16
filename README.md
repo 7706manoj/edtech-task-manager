@@ -31,8 +31,7 @@ The system includes:
   - Due Date  
   - Progress (not-started, in-progress, completed)  
 - Delete tasks  
-- View all personal tasks  
-- Filter tasks by status and date  
+- View all personal tasks   
 
 ---
 
@@ -49,8 +48,7 @@ The system includes:
 EdTech_Task_Manager/
 ├── server/                       # Backend (Node.js, Express, MongoDB)
 │   ├── index.js
-│   ├── package.json
-│   ├── .env                      # Not pushed to GitHub
+│   ├── package.json                      
 │   ├── config/
 │   │   └── db.js
 │   ├── models/
@@ -181,7 +179,6 @@ Open in browser:
 | `/tasks?due=overdue`                             | Tasks whose due date passed |
 | `/tasks?due=today`                               | Tasks due today             |
 | `/tasks?due=upcoming`                            | Upcoming future tasks       |
-| `/tasks?dueFrom=YYYY-MM-DD&dueTo=YYYY-MM-DD`     | Filter tasks by date range  |
 
 ---
 
