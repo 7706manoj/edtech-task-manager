@@ -60,18 +60,29 @@ EdTech_Task_Manager/
 │   ├── middleware/
 │   │   ├── auth.js
 │   │   └── errorHandler.js
-│
-├── client/                       # Frontend (React + Vite)
+├── client/                                   # Frontend (React + Vite)
 │   ├── src/
-│   │   ├── pages/
+│   │   ├── api/
+│   │   │   └── axios.js
+│   │
 │   │   ├── components/
+│   │   │   ├── TaskCard.jsx
+│   │   │   └── TaskForm.jsx
+│   │
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Login.jsx
+│   │   │   └── SignUp.jsx
+│   │
 │   │   ├── App.jsx
 │   │   └── main.jsx
+│
 │   ├── public/
 │   ├── package.json
 │   └── vite.config.js
 │
 └── README.md
+
 ```
 
 ---
